@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Register</title>
+		<link rel="stylesheet" type="text/css" href="register.css">
+		<script>
+			const register = async () => {
+				const email = document.getElementById("email").value;
+				const password = document.getElementById("password").value;
+				const firstName = document.getElementById("firstName").value;
+				const lastName = document.getElementById("lastName").value;
+
+				const response = await fetch("/api/register", {
+					method: "POST",
+					body: `${email}\n${password}\n${firstName}\n${lastName}`
+				});
+
+				if (response.ok) {
+					window.location.href = "/login.html"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<h1>Register</h1>
+			<form>
+				<div>
+					<label for="email">Email</label>
+					<input id="email" type="email" required/>
+				</div>
+				<br>
+				<div>
+					<label for="password">Password</label>
+					<input id="password" type="password" required/>
+				</div>
+				<br>
+				<div>
+					<label for="firstName">First Name</label>
+					<input id="firstName" required/>
+				</div>
+				<br>
+				<div>
+					<label for="lastName">Last Name</label>
+					<input id="lastName" required/>
+				</div>
+				<br>
+				<button type="button" onclick="register()">Register</button>
+			</form>
+			<div>
+				<p>Already have an account? <a href="/login.html">Login</a></p>
+			</div>
+			<button command="show-modal" commandfor="my-dialog">Open dialog</button>
+			<dialog id="my-dialog">
+				<p>Hello!</p>
+				<button commandfor="my-dialog" command="close">Close</button>
+			</dialog>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Login</title>
+		<link rel="stylesheet" type="text/css" href="login.css">
+		<script>
+			const register = async () => {
+				const email = document.getElementById("email").value;
+				const password = document.getElementById("password").value;
+
+				const response = await fetch("/api/login", {
+					method: "POST",
+					credentials: "include",
+					body: `${email}\n${password}`
+				});
+
+				if (response.ok) {
+					window.location.href = "/projects"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<h1>Login</h1>
+			<form>
+				<div>
+					<label for="email">Email</label>
+					<input id="email" type="email" required/>
+				</div>
+				<br>
+				<div>
+					<label for="password">Password</label>
+					<input id="password" type="password" required/>
+				</div>
+				<br>
+				<br>
+				<button type="button" onclick="register()">Login</button>
+			</form>
+			<div>
+				<p>Don't have an account? <a href="/register.html">Register</a></p>
+			</div>
+		</div>
+	</body>
+</html>

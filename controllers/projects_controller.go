@@ -204,7 +204,7 @@ func (c *ProjectsController) DeleteProject(w http.ResponseWriter, r *http.Reques
 	projectID := r.PathValue("projectID")
 
 	// Delete project
-	commandTag, err := c.Pool.Exec(context.Background(), "DELETE FROM projects WHERE user_id=$1 AND projects_id=$2", userID, projectID)
+	commandTag, err := c.Pool.Exec(context.Background(), "DELETE FROM projects WHERE user_id=$1 AND project_id=$2", userID, projectID)
 	if err != nil {
 		http.Error(w, "", http.StatusInternalServerError)
 		return

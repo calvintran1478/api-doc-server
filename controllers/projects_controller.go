@@ -138,6 +138,37 @@ func (c *ProjectsController) GetProject(w http.ResponseWriter, r *http.Request) 
 }
 
 /*
+ * Gets HTML page of project settings for a single user project
+ *
+ * Method: GET
+ * Path: /projects/{projectID}/settings
+ */
+func (c *ProjectsController) GetProjectSettings(w http.ResponseWriter, r *http.Request) {
+	// Get user id
+	userID := utils.GetUser(w, r)
+	if userID == "" {
+		return
+	}
+	projectID := r.PathValue("projectID")
+
+	// Fetch project
+	var project templ.Project
+	err := c.Pool.QueryRow(context.Background(), "SELECT name FROM projects WHERE user_id=$1 AND project_id=$2", userID, projectID).Scan(&project.Name)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			http.Error(w, "Project not found", http.StatusNotFound)
+			return
+		}
+		http.Error(w, "", http.StatusInternalServerError)
+		return
+	}
+	project.ProjectID = projectID
+
+	// Render HTML from project
+	templ.SettingsPage(project).Render(r.Context(), w)
+}
+
+/*
  * Updates the name of a user project
  *
  * Method: PATCH

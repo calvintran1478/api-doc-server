@@ -1,6 +1,6 @@
 package templ
 
-templ ProjectPage(project Project) {
+templ SettingsPage(project Project) {
     <!DOCTYPE html>
     <html lang="en">
         <head>
@@ -8,14 +8,14 @@ templ ProjectPage(project Project) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <title>{ project.Name }</title>
             <link rel="stylesheet" type="text/css" href="/project.css">
+            <script src="/settings.js" defer></script>
         </head>
         <body>
             <div>
                 <h1>{ project.Name }</h1>
-                <p>Description</p>
-                <h2>Endpoints</h2>
+                <button onclick={ templ.JSFuncCall("deleteProject", project.ProjectID) }>Delete</button>
             </div>
         </body>
-        <a href={ "/projects/" + project.ProjectID + "/settings" }>Settings</a>
     </html>
 }
+

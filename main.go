@@ -47,6 +47,7 @@ func main() {
 	router.HandleFunc("GET /projects/{projectID}", projectsController.GetProject)
 	router.HandleFunc("PATCH /api/projects/{projectID}", projectsController.UpdateProject)
 	router.HandleFunc("DELETE /api/projects/{projectID}", projectsController.DeleteProject)
+	router.HandleFunc("GET /projects/{projectID}/settings", projectsController.GetProjectSettings)
 	router.Handle("/", fileServer)
 
 	// Initialize and start up server

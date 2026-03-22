@@ -33,6 +33,7 @@ func main() {
 
 	// Set up resource controllers
 	userController := controllers.UserController{Pool: pool, BcryptCost: bcryptCost}
+	projectsController := controllers.ProjectsController{Pool: pool}
 
 	// Set up file server
 	fileServer := http.FileServer(http.Dir("./static/"))
@@ -41,6 +42,11 @@ func main() {
 	router := http.NewServeMux()
 	router.HandleFunc("POST /api/register", userController.RegisterUser)
 	router.HandleFunc("POST /api/login", userController.LoginUser)
+	router.HandleFunc("POST /api/projects", projectsController.AddProject)
+	router.HandleFunc("GET /projects", projectsController.GetProjects)
+	router.HandleFunc("GET /projects/{projectID}", projectsController.GetProject)
+	router.HandleFunc("PATCH /api/projects/{projectID}", projectsController.UpdateProject)
+	router.HandleFunc("DELETE /api/projects/{projectID}", projectsController.DeleteProject)
 	router.Handle("/", fileServer)
 
 	// Initialize and start up server

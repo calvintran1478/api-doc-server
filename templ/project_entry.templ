@@ -1,0 +1,11 @@
+package templ
+
+templ ProjectEntry(project Project) {
+    <div class="project-entry">
+        <a href={ "/projects/" + project.ProjectID }>
+            <div>
+                <p>{ project.Name }</p>
+            </div>
+        </a>
+    </div>
+}

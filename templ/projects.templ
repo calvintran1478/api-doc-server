@@ -1,0 +1,35 @@
+package templ
+
+type Project struct {
+	ProjectID string
+	Name string
+}
+
+templ ProjectsPage(projects []Project) {
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <title>Projects</title>
+            <link rel="stylesheet" type="text/css" href="projects.css">
+            <script src="/projects.js" defer></script>
+        </head>
+        <body>
+            <div>
+                <h1>My Projects</h1>
+                <form>
+                    <label for="name">Name</label>
+                    <input id="name" required/>
+                    <button type="button" onclick="addProject()">Add Project</button>
+                </form>
+                <hr>
+                <div id="projects">
+                    for _, project := range projects {
+                        @ProjectEntry(project)
+                    }
+                </div>
+            </div>
+        </body>
+    </html>
+}

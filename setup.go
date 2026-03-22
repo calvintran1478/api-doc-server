@@ -35,4 +35,22 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error creating user table", err)
 		os.Exit(1)
 	}
+
+	// Create project table
+	projectTableQuery := `
+		CREATE TABLE IF NOT EXISTS projects (
+			project_id VARCHAR PRIMARY KEY,
+			name VARCHAR UNIQUE,
+			user_id UUID,
+			CONSTRAINT project_user_id_fkey FOREIGN KEY(user_id) REFERENCES users(user_id)
+				ON DELETE CASCADE
+				ON UPDATE CASCADE,
+			UNIQUE (user_id, name)
+		);
+	`
+	_, err = pool.Exec(context.Background(), projectTableQuery)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating project table", err)
+		os.Exit(1)
+	}
 }

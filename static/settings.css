@@ -26,6 +26,8 @@ a {
     position: fixed;
     top: 1.5rem;
     right: 1.5rem;
+    text-decoration: none;
+    color: black;
 }
 
 #name-update {

@@ -10,6 +10,7 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/google/uuid"
+	"github.com/calvintran1478/api-doc-server/utils"
 )
 
 type UserController struct {
@@ -122,4 +123,33 @@ func (c *UserController) LoginUser(w http.ResponseWriter, r *http.Request) {
 
 	// Send success response
 	w.WriteHeader(http.StatusOK)
+}
+
+/*
+ * Logs out the user
+ *
+ * Method: POST
+ * Path: /api/logout
+ */
+func (c *UserController) LogoutUser(w http.ResponseWriter, r *http.Request) {
+	// Get user id
+	userID := utils.GetUser(w, r)
+	if userID == "" {
+		return
+	}
+
+	// Remove access token
+	cookie := http.Cookie{
+		Name: "access-token",
+		Value: "",
+		MaxAge: -1,
+		HttpOnly: true,
+		Secure: true,
+		Path: "/",
+		SameSite: http.SameSiteStrictMode,
+	}
+	http.SetCookie(w, &cookie)
+
+	// Send success response
+	w.WriteHeader(http.StatusNoContent)
 }

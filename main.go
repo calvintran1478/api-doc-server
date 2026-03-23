@@ -42,6 +42,7 @@ func main() {
 	router := http.NewServeMux()
 	router.HandleFunc("POST /api/register", userController.RegisterUser)
 	router.HandleFunc("POST /api/login", userController.LoginUser)
+	router.HandleFunc("POST /api/logout", userController.LogoutUser)
 	router.HandleFunc("POST /api/projects", projectsController.AddProject)
 	router.HandleFunc("GET /projects", projectsController.GetProjects)
 	router.HandleFunc("GET /projects/{projectID}", projectsController.GetProject)

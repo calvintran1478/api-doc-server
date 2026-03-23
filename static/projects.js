@@ -10,3 +10,13 @@ const addProject = async () => {
         document.getElementById("projects").insertAdjacentHTML("beforeend", await response.text());
     }
 }
+
+const logout = async () => {
+    const response = await fetch("/api/logout", {
+        method: "POST"
+    });
+
+    if (response.ok) {
+        window.location.href = "/login.html";
+    }
+}

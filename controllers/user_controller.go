@@ -17,6 +17,12 @@ type UserController struct {
 	BcryptCost int
 }
 
+/*
+ * Registers an account for the user
+ *
+ * Method: POST
+ * Path: /api/register
+ */
 func (c *UserController) RegisterUser(w http.ResponseWriter, r *http.Request) {
 	// Read request body
 	body, err := io.ReadAll(r.Body)
@@ -62,6 +68,12 @@ func (c *UserController) RegisterUser(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
+/*
+ * Logs in the user
+ *
+ * Method: POST
+ * Path: /api/login
+ */
 func (c *UserController) LoginUser(w http.ResponseWriter, r *http.Request) {
 	// Read request body
 	body, err := io.ReadAll(r.Body)

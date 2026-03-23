@@ -7,14 +7,20 @@ templ SettingsPage(project Project) {
             <meta charset="UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <title>{ project.Name }</title>
-            <link rel="stylesheet" type="text/css" href="/project.css">
+            <link rel="stylesheet" type="text/css" href="/settings.css">
             <script src="/settings.js" defer></script>
         </head>
         <body>
             <div>
-                <h1>{ project.Name }</h1>
-                <button onclick={ templ.JSFuncCall("deleteProject", project.ProjectID) }>Delete</button>
+                <div id="name-update">
+                    <label for="name">Project Name</label>
+                    <input id="name" value={ project.Name }/>
+                    <button onclick={ templ.JSFuncCall("updateProject", project.ProjectID) }>Save</button>
+                </div>
+                <hr>
+                <button onclick={ templ.JSFuncCall("deleteProject", project.ProjectID) }>Delete Project</button>
             </div>
+            <a href={ "/projects/" + project.ProjectID }>Back</a>
         </body>
     </html>
 }

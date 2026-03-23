@@ -1,0 +1,34 @@
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+label {
+    font-size: 1.25rem;
+}
+
+input {
+    width: 12rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+button {
+    width: fit-content;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+a {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+
+#name-update {
+    display: flex;
+    flex-direction: column;
+}

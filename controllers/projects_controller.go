@@ -22,7 +22,7 @@ type ProjectsController struct {
  * Adds a project for the user
  *
  * Method: POST
- * Path: /api/v1/projects
+ * Path: /api/projects
  */
 func (c *ProjectsController) AddProject(w http.ResponseWriter, r *http.Request) {
 	// Get user id

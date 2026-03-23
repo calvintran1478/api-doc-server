@@ -207,7 +207,7 @@ func (c *ProjectsController) UpdateProject(w http.ResponseWriter, r *http.Reques
 	}
 
 	// Update project
-	commandTag, err := c.Pool.Exec(context.Background(), "UPDATE projects SET name=$3 WHERE user_id=$1 AND projects_id=$2", userID, projectID, name)
+	commandTag, err := c.Pool.Exec(context.Background(), "UPDATE projects SET name=$3 WHERE user_id=$1 AND project_id=$2", userID, projectID, name)
 	if err != nil {
 		http.Error(w, "", http.StatusInternalServerError)
 		return

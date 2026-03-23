@@ -2,3 +2,19 @@
 body {
     font-family: Arial, sans-serif;
 }
+
+#settings-link {
+    position: fixed;
+    top: 1.5rem;
+    right: 5rem;
+    text-decoration: none;
+    color: black;
+}
+
+#back-link {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    text-decoration: none;
+    color: black;
+}

@@ -16,6 +16,7 @@ templ ProjectPage(project Project) {
                 <h2>Endpoints</h2>
             </div>
         </body>
-        <a href={ "/projects/" + project.ProjectID + "/settings" }>Settings</a>
+        <a id="settings-link" href={ "/projects/" + project.ProjectID + "/settings" }>Settings</a>
+        <a id="back-link" href="/projects">Back</a>
     </html>
 }

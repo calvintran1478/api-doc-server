@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/calvintran1478/api-doc-server/controllers"
+	"github.com/calvintran1478/api-doc-server/middleware"
 	"github.com/calvintran1478/api-doc-server/utils"
 )
 
@@ -54,7 +55,7 @@ func main() {
 	// Initialize and start up server
 	server := http.Server{
 		Addr:	 ":8080",
-		Handler: router,
+		Handler: middleware.ServeHomePage(router),
 	}
 
 	fmt.Println("Listening on http://localhost:8080")

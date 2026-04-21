@@ -1,8 +1,16 @@
 package templ
 
+type Endpoint struct {
+  EndpointID string
+	Method string
+	Path string
+	Description string
+}
+
 type Project struct {
 	ProjectID string
 	Name string
+	Endpoints []Endpoint
 }
 
 templ ProjectsPage(projects []Project) {

@@ -133,6 +133,23 @@ func (c *ProjectsController) GetProject(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
+	// Fetch project endpoints
+	rows, err := c.Pool.Query(context.Background(), "SELECT endpoint_id, method, path, description FROM endpoints WHERE project_id=$1", project.ProjectID)
+	if err != nil {
+		http.Error(w, "", http.StatusInternalServerError)
+		return
+	}
+
+	for rows.Next() {
+		var endpoint templ.Endpoint
+		err = rows.Scan(&endpoint.EndpointID, &endpoint.Method, &endpoint.Path, &endpoint.Description)
+		if err != nil {
+			http.Error(w, "", http.StatusInternalServerError)
+			return
+		}
+		project.Endpoints = append(project.Endpoints, endpoint)
+	}
+
 	// Render HTML from project
 	templ.ProjectPage(project).Render(r.Context(), w)
 }

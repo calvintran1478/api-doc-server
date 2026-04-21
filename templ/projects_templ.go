@@ -8,9 +8,17 @@ package templ
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+type Endpoint struct {
+	EndpointID  string
+	Method      string
+	Path        string
+	Description string
+}
+
 type Project struct {
 	ProjectID string
 	Name      string
+	Endpoints []Endpoint
 }
 
 func ProjectsPage(projects []Project) templ.Component {

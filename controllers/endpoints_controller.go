@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"encoding/base64"
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/calvintran1478/api-doc-server/templ"
 	"github.com/calvintran1478/api-doc-server/utils"
 )
 
@@ -70,5 +71,7 @@ func (c *EndpointsController) AddEndpoint(w http.ResponseWriter, r *http.Request
 	}
 
 	// Send success response
+	endpoint := templ.Endpoint{EndpointID: endpointID, Method: body.Method, Path: body.Path, Description: body.Description}
 	w.WriteHeader(http.StatusCreated)
+	templ.EndpointEntry(endpoint).Render(r.Context(), w)
 }

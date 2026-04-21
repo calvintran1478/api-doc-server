@@ -19,5 +19,7 @@ const addEndpoint = async () => {
         document.getElementById("method-select").value = "POST";
         const path = document.getElementById("path").value = "";
         const description = document.getElementById("description").value = "";
+
+        document.getElementById("endpoints").insertAdjacentHTML("beforeend", await response.text());
     }
 }

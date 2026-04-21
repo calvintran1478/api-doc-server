@@ -50,11 +50,9 @@ templ ProjectPage(project Project) {
                 </dialog>
             </div>
             <hr>
-            <div>
+            <div id="endpoints">
             for _, endpoint := range project.Endpoints {
-                <p>{ endpoint.Method } { endpoint.Path }</p>
-                <p>{ endpoint.Description }</p>
-                <hr>
+                @EndpointEntry(endpoint)
             }
             </div>
         </body>

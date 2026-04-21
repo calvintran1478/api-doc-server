@@ -8,12 +8,46 @@ templ ProjectPage(project Project) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <title>{ project.Name }</title>
             <link rel="stylesheet" type="text/css" href="/project.css">
+            <script src="/project.js" defer></script>
         </head>
         <body>
             <div>
                 <h1>{ project.Name }</h1>
                 <p>Description</p>
-                <h2>Endpoints</h2>
+                <div id="endpoint-edit">
+                    <h2>Endpoints</h2>
+                    <button command="show-modal" commandfor="add-dialog">Add Endpoint</button>
+                </div>
+                <dialog id="add-dialog">
+                    <form>
+                        <div>
+                            <label for="method-select">Method</label>
+                            <select id="method-select" required>
+                                <option value="POST">POST</option>
+                                <option value="GET">GET</option>
+                                <option value="PATCH">PATCH</option>
+                                <option value="DELETE">DELETE</option>
+                                <option value="PUT">PUT</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="path">Path</label>
+                            <br>
+                            <input id="path" required/>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="description">Description</label>
+                            <br>
+                            <textarea id="description" required></textarea>
+                        </div>
+                        <div id="submit-div">
+                            <button type="button" onclick="addEndpoint()" command="close" commandfor="add-dialog">Submit</button>
+                        </div>
+                    </form>
+                    <button class="close-button" command="close" commandfor="add-dialog">Close</button>
+                </dialog>
             </div>
             <hr>
             <div>

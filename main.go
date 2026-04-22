@@ -54,6 +54,7 @@ func main() {
 	router.HandleFunc("GET /projects/{projectID}/settings", projectsController.GetProjectSettings)
 
 	router.HandleFunc("POST /api/projects/{projectID}/endpoints", endpointsController.AddEndpoint)
+	router.HandleFunc("DELETE /api/projects/{projectID}/endpoints/{endpointID}", endpointsController.DeleteEndpoint)
 
 	router.Handle("/", fileServer)
 

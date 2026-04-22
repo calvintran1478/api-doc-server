@@ -75,3 +75,32 @@ func (c *EndpointsController) AddEndpoint(w http.ResponseWriter, r *http.Request
 	w.WriteHeader(http.StatusCreated)
 	templ.EndpointEntry(endpoint).Render(r.Context(), w)
 }
+
+/*
+ * Deletes an endpoint from a user project
+ *
+ * Method: DELETE
+ * Path: /api/projects/{projectID}/endpoints/{endpointID}
+ */
+func (c *EndpointsController) DeleteEndpoint(w http.ResponseWriter, r *http.Request) {
+	// Get user id
+	userID := utils.GetUser(w, r)
+	if userID == "" {
+		return
+	}
+	projectID := r.PathValue("projectID")
+	endpointID := r.PathValue("endpointID")
+
+	// Delete endpoint
+	commandTag, err := c.Pool.Exec(context.Background(), "DELETE FROM endpoints WHERE project_id=$1 AND endpoint_id=$2 AND EXISTS (SELECT 1 FROM projects WHERE user_id=$3 AND project_id=$4)", projectID, endpointID, userID, projectID)
+	if err != nil {
+		http.Error(w, "", http.StatusInternalServerError)
+		return
+	} else if commandTag.RowsAffected() != 1 {
+		http.Error(w, "Endpoint not found", http.StatusNotFound)
+		return
+	}
+
+	// Send success response
+	w.WriteHeader(http.StatusNoContent)
+}

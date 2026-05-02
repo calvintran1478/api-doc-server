@@ -6,7 +6,7 @@ templ EndpointEntry(endpoint Endpoint) {
             <p>{ endpoint.Method } { endpoint.Path }</p>
             <p>{ endpoint.Description }</p>
         </div>
-        <button class="delete-button" style="display: none" onclick={ templ.JSFuncCall("deleteEndpoint", endpoint.EndpointID) }>Delete</button>
+        <button class="delete-button" onclick={ templ.JSFuncCall("deleteEndpoint", endpoint.EndpointID) }>Delete</button>
         <hr style="margin-top: 1.5rem">
     </div>
 }

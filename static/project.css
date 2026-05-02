@@ -1,4 +1,8 @@
 
+:root {
+    --delete-button-display: none;
+}
+
 body {
     font-family: Arial, sans-serif;
 }
@@ -41,6 +45,7 @@ textarea {
 .delete-button {
     width: 4rem;
     height: 2rem;
+    display: var(--delete-button-display);
     margin: 0rem;
     position: absolute;
     top: 0rem;

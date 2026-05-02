@@ -25,13 +25,11 @@ const addEndpoint = async () => {
 }
 
 const toggleEdit = () => {
-    const endpointContainer = document.getElementById("endpoints");
-    const endpoints = endpointContainer.querySelectorAll(".endpoint");
+    const rootStyles = getComputedStyle(document.documentElement);
+    const deleteButtonDisplay = rootStyles.getPropertyValue("--delete-button-display");
+    const newDeleteButtonDisplay = rootStyles.getPropertyValue("--delete-button-display") === "none" ? "block" : "none";
 
-    endpoints.forEach((endpoint) => {
-        const deleteButton = endpoint.querySelector("button");
-        deleteButton.style.display = (deleteButton.style.display === "none") ? "block" : "none";
-    })
+    document.documentElement.style.setProperty("--delete-button-display", newDeleteButtonDisplay);
 }
 
 const deleteEndpoint = async (endpointID) => {

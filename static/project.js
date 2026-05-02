@@ -25,6 +25,9 @@ const addEndpoint = async () => {
 }
 
 const toggleEdit = () => {
+    const editButton = document.querySelector(".edit-button");
+    editButton.textContent = editButton.textContent === "Edit" ? "Done" : "Edit";
+
     const rootStyles = getComputedStyle(document.documentElement);
     const deleteButtonDisplay = rootStyles.getPropertyValue("--delete-button-display");
     const newDeleteButtonDisplay = rootStyles.getPropertyValue("--delete-button-display") === "none" ? "block" : "none";

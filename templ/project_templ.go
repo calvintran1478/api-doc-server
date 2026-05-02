@@ -55,7 +55,7 @@ func ProjectPage(project Project) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</h1><p>Description</p><div id=\"endpoint-edit\"><h2>Endpoints</h2><button command=\"show-modal\" commandfor=\"add-dialog\">Add Endpoint</button></div><dialog id=\"add-dialog\"><form><div><label for=\"method-select\">Method</label> <select id=\"method-select\" required><option value=\"POST\">POST</option> <option value=\"GET\">GET</option> <option value=\"PATCH\">PATCH</option> <option value=\"DELETE\">DELETE</option> <option value=\"PUT\">PUT</option></select></div><br><div><label for=\"path\">Path</label><br><input id=\"path\" required></div><br><div><label for=\"description\">Description</label><br><textarea id=\"description\" required></textarea></div><div id=\"submit-div\"><button type=\"button\" onclick=\"addEndpoint()\" command=\"close\" commandfor=\"add-dialog\">Submit</button></div></form><button class=\"close-button\" command=\"close\" commandfor=\"add-dialog\">Close</button></dialog></div><hr><div id=\"endpoints\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</h1><p>Description</p><div id=\"endpoint-edit\"><h2>Endpoints</h2><button command=\"show-modal\" commandfor=\"add-dialog\">Add Endpoint</button> <button class=\"edit-button\" onclick=\"toggleEdit()\">Edit</button></div><dialog id=\"add-dialog\"><form><div><label for=\"method-select\">Method</label> <select id=\"method-select\" required><option value=\"POST\">POST</option> <option value=\"GET\">GET</option> <option value=\"PATCH\">PATCH</option> <option value=\"DELETE\">DELETE</option> <option value=\"PUT\">PUT</option></select></div><br><div><label for=\"path\">Path</label><br><input id=\"path\" required></div><br><div><label for=\"description\">Description</label><br><textarea id=\"description\" required></textarea></div><div id=\"submit-div\"><button type=\"button\" onclick=\"addEndpoint()\" command=\"close\" commandfor=\"add-dialog\">Submit</button></div></form><button class=\"close-button\" command=\"close\" commandfor=\"add-dialog\">Close</button></dialog></div><hr><div id=\"endpoints\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -72,7 +72,7 @@ func ProjectPage(project Project) templ.Component {
 		var templ_7745c5c3_Var4 templ.SafeURL
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinURLErrs("/projects/" + project.ProjectID + "/settings")
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `project.templ`, Line: 59, Col: 83}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `project.templ`, Line: 60, Col: 83}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {

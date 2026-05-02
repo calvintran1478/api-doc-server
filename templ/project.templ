@@ -17,6 +17,7 @@ templ ProjectPage(project Project) {
                 <div id="endpoint-edit">
                     <h2>Endpoints</h2>
                     <button command="show-modal" commandfor="add-dialog">Add Endpoint</button>
+                    <button class="edit-button" onclick="toggleEdit()">Edit</button>
                 </div>
                 <dialog id="add-dialog">
                     <form>

@@ -33,6 +33,24 @@ textarea {
     right: 1rem;
 }
 
+.edit-button {
+    width: 5.5rem;
+    height: 2.5rem;
+}
+
+.delete-button {
+    width: 4rem;
+    height: 2rem;
+    margin: 0rem;
+    position: absolute;
+    top: 0rem;
+    right: 1rem;
+}
+
+.endpoint {
+    position: relative;
+}
+
 #submit-div {
     display: flex;
     justify-content: center;

@@ -16,7 +16,7 @@ button {
 
 dialog {
     width: 36rem;
-    height: 24rem;
+    height: 40rem;
 }
 
 select {
@@ -54,6 +54,14 @@ textarea {
 
 .endpoint {
     position: relative;
+}
+
+#add-path-parameter {
+    width: 4rem;
+    height: 2rem;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1rem;
 }
 
 #submit-div {

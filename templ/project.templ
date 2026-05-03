@@ -43,6 +43,14 @@ templ ProjectPage(project Project) {
                             <br>
                             <textarea id="description" required></textarea>
                         </div>
+                        <br>
+                        <div>
+                            <label>Path Parameters</label>
+                            <br>
+                            <button id="add-path-parameter" type="button">Add</button>
+                            <div id="path-parameters">
+                            </div>
+                        </div>
                         <div id="submit-div">
                             <button type="button" onclick="addEndpoint()" command="close" commandfor="add-dialog">Submit</button>
                         </div>

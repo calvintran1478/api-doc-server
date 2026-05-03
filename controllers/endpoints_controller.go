@@ -16,10 +16,17 @@ type EndpointsController struct {
 	Pool *pgxpool.Pool
 }
 
-type AddEndpointRequest struct {
-	Method 		string `json:"method"`
-	Path 		string `json:"path"`
+type PathParameter struct {
+	Name		string `json:"name"`
+	Type		string `json:"type"`
 	Description string `json:"description"`
+}
+
+type AddEndpointRequest struct {
+	Method			string `json:"method"`
+	Path			string `json:"path"`
+	Description		string `json:"description"`
+	PathParameters  []PathParameter `json:"path_parameters"`
 }
 
 /*
@@ -68,6 +75,18 @@ func (c *EndpointsController) AddEndpoint(w http.ResponseWriter, r *http.Request
 	} else if commandTag.RowsAffected() != 1 {
 		http.Error(w, "Project not found", http.StatusNotFound)
 		return
+	}
+
+	// Add path parameters
+	for _, pathParameter := range body.PathParameters {
+		commandTag, err = c.Pool.Exec(context.Background(), "INSERT INTO path_parameters (endpoint_id, name, type, description) VALUES ($1, $2, $3, $4) ON CONFLICT (endpoint_id, name) DO NOTHING", endpointID, pathParameter.Name, pathParameter.Type, pathParameter.Description)
+		if err != nil {
+			http.Error(w, "", http.StatusInternalServerError)
+			return
+		} else if commandTag.RowsAffected() != 1 {
+			http.Error(w, "Duplicate path parameter found", http.StatusConflict)
+			return
+		}
 	}
 
 	// Send success response

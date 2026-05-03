@@ -70,10 +70,7 @@ document.getElementById("add-path-parameter").addEventListener("click", (event) 
 
     const pathParameterContainer = document.createElement("div");
     pathParameterContainer.id = pathParameterID;
-    pathParameterContainer.style.border = "1px solid";
-    pathParameterContainer.style.position = "relative";
-    pathParameterContainer.style.padding = "1rem";
-    pathParameterContainer.style.marginTop = "1rem";
+    pathParameterContainer.classList.add("path-parameter-container");
 
     const nameLabel = document.createElement("label");
     nameLabel.textContent = "Name";
@@ -83,39 +80,25 @@ document.getElementById("add-path-parameter").addEventListener("click", (event) 
 
     const typeLabel = document.createElement("label");
     typeLabel.textContent = "Type";
-    typeLabel.style.marginLeft = "1.25rem";
-    typeLabel.style.marginRight = "0.25rem";
+    typeLabel.classList.add("path-parameter-type-label");
 
     const typeInput = document.createElement("input");
 
     const descriptionLabel = document.createElement("label");
     descriptionLabel.textContent = "Description";
-    descriptionLabel.style.display = "block";
-    descriptionLabel.style.marginTop = "1rem";
-    descriptionLabel.style.marginBottom = "0.25rem";
+    descriptionLabel.classList.add("path-parameter-description-label");
 
     const descriptionInput = document.createElement("textarea");
     descriptionInput.style.height = "2.5rem";
 
     const deletePathParameterButton = document.createElement("button");
     deletePathParameterButton.textContent = "Delete";
-    deletePathParameterButton.style.position = "absolute";
-    deletePathParameterButton.style.right = "0.5rem";
-    deletePathParameterButton.style.top = "1rem";
-    deletePathParameterButton.style.width = "3.5rem";
-    deletePathParameterButton.style.height = "1.5rem";
-    deletePathParameterButton.style.margin = "0";
+    deletePathParameterButton.classList.add("delete-path-parameter");
     deletePathParameterButton.addEventListener("click", () => {
         document.getElementById(pathParameterID).remove();
     });
 
-    pathParameterContainer.appendChild(nameLabel);
-    pathParameterContainer.appendChild(nameInput);
-    pathParameterContainer.appendChild(typeLabel);
-    pathParameterContainer.appendChild(typeInput);
-    pathParameterContainer.appendChild(descriptionLabel);
-    pathParameterContainer.appendChild(descriptionInput);
-    pathParameterContainer.appendChild(deletePathParameterButton);
+    pathParameterContainer.append(nameLabel, nameInput, typeLabel, typeInput, descriptionLabel, descriptionInput, deletePathParameterButton)
 
     fragment.appendChild(pathParameterContainer);
     pathParametersContainer.append(fragment);

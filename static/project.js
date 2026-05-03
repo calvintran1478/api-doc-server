@@ -61,45 +61,17 @@ const deleteEndpoint = async (endpointID) => {
     }
 }
 
+const deletePathParameter = (pathParameterID) => {
+    document.getElementById(pathParameterID).remove();
+}
+
 document.getElementById("add-path-parameter").addEventListener("click", (event) => {
     event.preventDefault();
     const pathParameterID = Math.random().toString(36).substring(2, 10);
 
-    const pathParametersContainer = document.getElementById("path-parameters");
-    const fragment = document.createDocumentFragment();
+    const html = `
+        <div id=${pathParameterID} class="path-parameter-container"><label style="margin-right: 0.25rem;">Name</label><input><label class="path-parameter-type-label">Type</label><input><label class="path-parameter-description-label">Description</label><textarea style="height: 2.5rem;"></textarea><button class="delete-path-parameter" onclick="deletePathParameter('${pathParameterID}')">Delete</button></div>
+    `
 
-    const pathParameterContainer = document.createElement("div");
-    pathParameterContainer.id = pathParameterID;
-    pathParameterContainer.classList.add("path-parameter-container");
-
-    const nameLabel = document.createElement("label");
-    nameLabel.textContent = "Name";
-    nameLabel.style.marginRight = "0.25rem"
-
-    const nameInput = document.createElement("input");
-
-    const typeLabel = document.createElement("label");
-    typeLabel.textContent = "Type";
-    typeLabel.classList.add("path-parameter-type-label");
-
-    const typeInput = document.createElement("input");
-
-    const descriptionLabel = document.createElement("label");
-    descriptionLabel.textContent = "Description";
-    descriptionLabel.classList.add("path-parameter-description-label");
-
-    const descriptionInput = document.createElement("textarea");
-    descriptionInput.style.height = "2.5rem";
-
-    const deletePathParameterButton = document.createElement("button");
-    deletePathParameterButton.textContent = "Delete";
-    deletePathParameterButton.classList.add("delete-path-parameter");
-    deletePathParameterButton.addEventListener("click", () => {
-        document.getElementById(pathParameterID).remove();
-    });
-
-    pathParameterContainer.append(nameLabel, nameInput, typeLabel, typeInput, descriptionLabel, descriptionInput, deletePathParameterButton)
-
-    fragment.appendChild(pathParameterContainer);
-    pathParametersContainer.append(fragment);
+    document.getElementById("path-parameters").insertAdjacentHTML("beforeend", html);
 });

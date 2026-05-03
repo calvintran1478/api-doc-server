@@ -10,6 +10,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"net/http"
 	"slices"
+	"sort"
 )
 
 type EndpointsController struct {
@@ -57,6 +58,15 @@ func (c *EndpointsController) AddEndpoint(w http.ResponseWriter, r *http.Request
 		http.Error(w, "Invalid method for endpoint", http.StatusBadRequest)
 		return
 	}
+	sort.Slice(body.PathParameters, func(i, j int) bool {
+		return body.PathParameters[i].Name < body.PathParameters[j].Name
+	})
+	for i := range len(body.PathParameters) - 1 {
+		if body.PathParameters[i].Name == body.PathParameters[i+1].Name {
+			http.Error(w, "Duplicate path parameter found", http.StatusConflict)
+			return
+		}
+	}
 
 	// Generate endpoint ID
 	endpointIDBytes := make([]byte, 16)
@@ -79,12 +89,9 @@ func (c *EndpointsController) AddEndpoint(w http.ResponseWriter, r *http.Request
 
 	// Add path parameters
 	for _, pathParameter := range body.PathParameters {
-		commandTag, err = c.Pool.Exec(context.Background(), "INSERT INTO path_parameters (endpoint_id, name, type, description) VALUES ($1, $2, $3, $4) ON CONFLICT (endpoint_id, name) DO NOTHING", endpointID, pathParameter.Name, pathParameter.Type, pathParameter.Description)
+		commandTag, err = c.Pool.Exec(context.Background(), "INSERT INTO path_parameters (endpoint_id, name, type, description) VALUES ($1, $2, $3, $4)", endpointID, pathParameter.Name, pathParameter.Type, pathParameter.Description)
 		if err != nil {
 			http.Error(w, "", http.StatusInternalServerError)
-			return
-		} else if commandTag.RowsAffected() != 1 {
-			http.Error(w, "Duplicate path parameter found", http.StatusConflict)
 			return
 		}
 	}

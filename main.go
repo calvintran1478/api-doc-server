@@ -1,15 +1,15 @@
 package main
 
 import (
-	"os"
-	"fmt"
 	"context"
-	"strconv"
-	"net/http"
-	"github.com/jackc/pgx/v5/pgxpool"
+	"fmt"
 	"github.com/calvintran1478/api-doc-server/controllers"
 	"github.com/calvintran1478/api-doc-server/middleware"
 	"github.com/calvintran1478/api-doc-server/utils"
+	"github.com/jackc/pgx/v5/pgxpool"
+	"net/http"
+	"os"
+	"strconv"
 )
 
 func main() {
@@ -60,7 +60,7 @@ func main() {
 
 	// Initialize and start up server
 	server := http.Server{
-		Addr:	 ":8080",
+		Addr:    ":8080",
 		Handler: middleware.ServeHomePage(router),
 	}
 

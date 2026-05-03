@@ -1,15 +1,15 @@
 package controllers
 
 import (
-	"slices"
 	"context"
-	"net/http"
 	"crypto/rand"
-	"encoding/json"
 	"encoding/base64"
-	"github.com/jackc/pgx/v5/pgxpool"
+	"encoding/json"
 	"github.com/calvintran1478/api-doc-server/templ"
 	"github.com/calvintran1478/api-doc-server/utils"
+	"github.com/jackc/pgx/v5/pgxpool"
+	"net/http"
+	"slices"
 )
 
 type EndpointsController struct {
@@ -17,16 +17,16 @@ type EndpointsController struct {
 }
 
 type PathParameter struct {
-	Name		string `json:"name"`
-	Type		string `json:"type"`
+	Name        string `json:"name"`
+	Type        string `json:"type"`
 	Description string `json:"description"`
 }
 
 type AddEndpointRequest struct {
-	Method			string `json:"method"`
-	Path			string `json:"path"`
-	Description		string `json:"description"`
-	PathParameters  []PathParameter `json:"path_parameters"`
+	Method         string          `json:"method"`
+	Path           string          `json:"path"`
+	Description    string          `json:"description"`
+	PathParameters []PathParameter `json:"path_parameters"`
 }
 
 /*

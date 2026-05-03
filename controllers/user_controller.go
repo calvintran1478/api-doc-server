@@ -1,20 +1,20 @@
 package controllers
 
 import (
-	"io"
-	"context"
 	"bytes"
+	"context"
 	"errors"
-	"net/http"
-	"golang.org/x/crypto/bcrypt"
+	"github.com/calvintran1478/api-doc-server/utils"
+	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/google/uuid"
-	"github.com/calvintran1478/api-doc-server/utils"
+	"golang.org/x/crypto/bcrypt"
+	"io"
+	"net/http"
 )
 
 type UserController struct {
-	Pool *pgxpool.Pool
+	Pool       *pgxpool.Pool
 	BcryptCost int
 }
 
@@ -111,12 +111,12 @@ func (c *UserController) LoginUser(w http.ResponseWriter, r *http.Request) {
 
 	// Add access token
 	cookie := http.Cookie{
-		Name: "access-token",
-		Value: userID,
-		MaxAge: 604800,
+		Name:     "access-token",
+		Value:    userID,
+		MaxAge:   604800,
 		HttpOnly: true,
-		Secure: true,
-		Path: "/",
+		Secure:   true,
+		Path:     "/",
 		SameSite: http.SameSiteStrictMode,
 	}
 	http.SetCookie(w, &cookie)
@@ -140,12 +140,12 @@ func (c *UserController) LogoutUser(w http.ResponseWriter, r *http.Request) {
 
 	// Remove access token
 	cookie := http.Cookie{
-		Name: "access-token",
-		Value: "",
-		MaxAge: -1,
+		Name:     "access-token",
+		Value:    "",
+		MaxAge:   -1,
 		HttpOnly: true,
-		Secure: true,
-		Path: "/",
+		Secure:   true,
+		Path:     "/",
 		SameSite: http.SameSiteStrictMode,
 	}
 	http.SetCookie(w, &cookie)

@@ -1,17 +1,17 @@
 package controllers
 
 import (
-	"io"
 	"context"
-	"errors"
-	"unicode"
-	"net/http"
 	"crypto/rand"
 	"encoding/base64"
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
+	"errors"
 	"github.com/calvintran1478/api-doc-server/templ"
 	"github.com/calvintran1478/api-doc-server/utils"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
+	"io"
+	"net/http"
+	"unicode"
 )
 
 type ProjectsController struct {

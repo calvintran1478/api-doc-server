@@ -1,9 +1,9 @@
 package utils
 
 import (
-	"os"
-	"fmt"
 	"bufio"
+	"fmt"
+	"os"
 	"strings"
 )
 
@@ -21,7 +21,7 @@ func LoadEnv(filename string) {
 		line := scanner.Text()
 		equalsIndex := strings.Index(line, "=")
 		if equalsIndex != -1 {
-			os.Setenv(line[:equalsIndex], line[equalsIndex + 1:])
+			os.Setenv(line[:equalsIndex], line[equalsIndex+1:])
 		}
 	}
 }
